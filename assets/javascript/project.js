@@ -1,6 +1,5 @@
 
 //  add_initial_authentication
-console.log("javascript file is working")
 // build authorization URL.
   // Question: How do we keep the client ID hidden?
   // Build Redirect URL: 
@@ -15,7 +14,7 @@ var authorizationURL = "https://accounts.spotify.com/authorize?client_id=6ba0c77
 // How do I wait for the user to authenticate and then run the next line of code:
 // var returnedHash = window.location.hash.substr(1)
 // console.log(returnedHas)
-
+console.log(document.getElementById(location.hash.substring(1)))
 
 $("button").on("click", function() {
     var animal = $(this).attr("data-animal");
