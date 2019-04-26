@@ -1,0 +1,9 @@
+.mainsection{
+    min-height: 600px;
+}
+.searchform{
+    padding:20px;
+}
+.searchlabel{
+    color:white!important;
+}
