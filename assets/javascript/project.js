@@ -17,16 +17,23 @@ var authorizationURL = "https://accounts.spotify.com/authorize?client_id=6ba0c77
 // How do I wait for the user to authenticate and then run the next line of code:
 // var returnedHash = window.location.hash.substr(1)
 // console.log(returnedHas)
-console.log(document.getElementById(location.hash.substring(1)))
+console.log(' location hash', document.getElementById(location.hash.substring(1)))
 
-$("button").on("click", function() {
-    var animal = $(this).attr("data-animal");
-    var queryURL = "https://api.spotify.com/search?q=" +
-      animal + "&api_key=dc6zaTOxFJmzC&limit=10";
-
+$("#search-button").on("click", function() {
+  window.location.href = 'https://accounts.spotify.com/authorize?client_id=6ba0c775865d4f34a62198bacaebc943&response_type=token&redirect_uri=https://djpowell23.github.io/Project-1/';
+  var authorizationToken = document.getElementById(location.hash.substring(1));
+  // var authenticationURL = "https://accounts.spotify.com/authorize?client_id=6ba0c775865d4f34a62198bacaebc943&response_type=token&redirect_uri=https://djpowell23.github.io/Project-1/";
+  var queryURL = "https://api.spotify.com/v1/search/q=" + $('#searchTerm').val().trim() + "&type=artist,track";
     $.ajax({
+      type: "POST",
+      beforeSend: function(request) {
+        request.setRequestHeader("Authorization", authorizationToken)
+      },
       url: queryURL,
-      method: "GET"
+      method: "GET",
+      headers: {
+        'Authorization': 'Bearer BQAwA9Fgjmn001OkHefIec_yYOV-Yi4ak4pOs_QwJlplP3uOL8dDyCdQd5jNKv-A1PJeEWIy9dDcUohzHJ45zeSlU18WT9MVGzFwcNLFBupwjs6nsbFvuUYA9ArUdwnh-cAc-tYgWHYI_G8nvdK0Ru1sEGy2n2XoIo-WH54l11eOv95SHVI'
+      }
     }).then(function(response) {
       // Step 1: Run this file, click a button, and see what the response object looks like in the browser's console.
       // Open up the data key, then open up the 0th, element. Study the keys and how the JSON is structured.
