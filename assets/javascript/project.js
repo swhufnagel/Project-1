@@ -43,7 +43,7 @@ function getAuthorizationToken(){
   console.log(returnedAuthorizationToken)
   // Need code to get the substring from returnedAuthorizationToken at the position of "=" + 1
   // something like this: x = x.substring(hash.indexOf("=")+1) which can be run in console as a text
-  authorizationToken = returnedAuthorizationToken.substring(returnedAuthorizationToken.indexOf("=")+1)
+  authorizationToken = "Bearer " + returnedAuthorizationToken.substring(returnedAuthorizationToken.indexOf("=")+1, returnedAuthorizationToken.indexOf("&"));
   console.log(authorizationToken)
   // We might also need to truncate the end of it so it's truly just the authorization token and not the other parameters
 }
@@ -67,7 +67,7 @@ console.log(redirectUri);
 $("#search-button").on("click", function() {
     buildQueryURL()
     $.ajax({
-      type: "GET",
+      method: "GET",
       beforeSend: function(request) {
         request.setRequestHeader("Authorization", authorizationToken)
       },
