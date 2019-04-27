@@ -17,7 +17,8 @@
 // How do I wait for the user to authenticate and then run the next line of code:
 // var returnedHash = window.location.hash.substr(1)
 // console.log(returnedHas)
-var authorizationURL = "https://accounts.spotify.com/authorize?client_id=6ba0c775865d4f34a62198bacaebc943&response_type=token&redirect_uri=https://djpowell23.github.io/Project-1/"
+var redirectUri = window.location.href;
+// var authorizationURL = "https://accounts.spotify.com/authorize?client_id=6ba0c775865d4f34a62198bacaebc943&response_type=token&redirect_uri="+ redirectUri;
 var authorizationToken = ""
 var queryURL = ""
 displayButton()
@@ -55,9 +56,12 @@ function buildQueryURL() {
 
 }
 
+var redirectUri = window.location.href;
+redirectUri = redirectUri.substring(0, redirectUri.length -1);
 $('#login-button').on('click', function(){
-  window.location.href = 'https://accounts.spotify.com/authorize?client_id=6ba0c775865d4f34a62198bacaebc943&response_type=token&redirect_uri=https://djpowell23.github.io/Project-1/';
+  window.location.href = 'https://accounts.spotify.com/authorize?client_id=6ba0c775865d4f34a62198bacaebc943&response_type=token&redirect_uri=' + redirectUri;
 })
+console.log(redirectUri);
 
 // Let's build this out with a basic search
 $("#search-button").on("click", function() {
