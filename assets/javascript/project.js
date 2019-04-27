@@ -12,32 +12,63 @@
 // On click of authorization URL, user is taken to log in.
 // Use response to get an access token, which we can use to make subsequen API requests
 // 
-var authorizationURL = "https://accounts.spotify.com/authorize?client_id=6ba0c775865d4f34a62198bacaebc943&response_type=token&redirect_uri=https://djpowell23.github.io/Project-1/"
+
 // After user authorizes spotify, we need to get the hash that is returned so we can use it in future API reqeusts:
 // How do I wait for the user to authenticate and then run the next line of code:
 // var returnedHash = window.location.hash.substr(1)
 // console.log(returnedHas)
-console.log(' location hash', document.getElementById(location.hash.substring(1)))
+var authorizationURL = "https://accounts.spotify.com/authorize?client_id=6ba0c775865d4f34a62198bacaebc943&response_type=token&redirect_uri=https://djpowell23.github.io/Project-1/"
+var authorizationToken = ""
+var queryURL = ""
+displayButton()
+getAuthorizationToken()
 
-$("#search-button").on("click", function() {
+function displayButton(){
+  // We need someone to get the CSS hide class to work so that only one button shows
+  // This is likely being overridden in semantic.css somewhere
+  if (authorizationToken === ""){
+    $('#login-button').removeClass('hide')
+    $('#search-button').addClass('hide')
+  } else {
+    $('#login-button').addClass('hide')
+    $('#search-button').removeClass('hide')
+  }
+}
+
+function getAuthorizationToken(){
+  // This function needs to be called every time the page is loaded so that when users
+  // are returned to the app after authenticating in Spotify, the access token is captured
+  var returnedAuthorizationToken = location.hash.substr(1)
+  console.log(returnedAuthorizationToken)
+  // Need code to get the substring from returnedAuthorizationToken at the position of "=" + 1
+  // something like this: x = x.substring(hash.indexOf("=")+1) which can be run in console as a text
+  authorizationToken = returnedAuthorizationToken.substring(returnedAuthorizationToken.indexOf("=")+1)
+  console.log(authorizationToken)
+  // We might also need to truncate the end of it so it's truly just the authorization token and not the other parameters
+}
+
+function buildQueryURL() {
+  // add code here to built out the searchURL
+  // the searchType can later be modifed to call the function with different searches
+  // ie 'search' or 'seed'
+  queryURL = "https://api.spotify.com/v1/search/q=" + $('#searchTerm').val().trim() + "&type=artist";
+
+}
+
+$('#login-button').on('click', function(){
   window.location.href = 'https://accounts.spotify.com/authorize?client_id=6ba0c775865d4f34a62198bacaebc943&response_type=token&redirect_uri=https://djpowell23.github.io/Project-1/';
-  var authorizationToken = document.getElementById(location.hash.substring(1));
-  // var authenticationURL = "https://accounts.spotify.com/authorize?client_id=6ba0c775865d4f34a62198bacaebc943&response_type=token&redirect_uri=https://djpowell23.github.io/Project-1/";
-  var queryURL = "https://api.spotify.com/v1/search/q=" + $('#searchTerm').val().trim() + "&type=artist,track";
+})
+
+// Let's build this out with a basic search
+$("#search-button").on("click", function() {
+    buildQueryURL()
     $.ajax({
-      type: "POST",
+      type: "GET",
       beforeSend: function(request) {
         request.setRequestHeader("Authorization", authorizationToken)
       },
       url: queryURL,
-      method: "GET",
-      headers: {
-        'Authorization': 'Bearer BQAwA9Fgjmn001OkHefIec_yYOV-Yi4ak4pOs_QwJlplP3uOL8dDyCdQd5jNKv-A1PJeEWIy9dDcUohzHJ45zeSlU18WT9MVGzFwcNLFBupwjs6nsbFvuUYA9ArUdwnh-cAc-tYgWHYI_G8nvdK0Ru1sEGy2n2XoIo-WH54l11eOv95SHVI'
-      }
     }).then(function(response) {
-      // Step 1: Run this file, click a button, and see what the response object looks like in the browser's console.
-      // Open up the data key, then open up the 0th, element. Study the keys and how the JSON is structured.
-
       console.log(response);
     })
 })

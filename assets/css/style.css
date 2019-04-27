@@ -1,3 +1,7 @@
+#search-button .hide {
+    display: none;
+}
+
 .mainsection{
     min-height: 600px;
 }
@@ -7,3 +11,4 @@
 .searchlabel{
     color:white!important;
 }
+
