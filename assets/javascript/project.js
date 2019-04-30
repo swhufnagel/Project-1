@@ -28,10 +28,15 @@ function displayButton(){
   // We need someone to get the CSS hide class to work so that only one button shows
   // This is likely being overridden in semantic.css somewhere
   if (authorizationToken === "Bearer "){
+    $('.field').attr('style', "display:none");
+    $('.find').attr('style', "display:none");
     $('#login-button').attr('style', "display:block");
     $('#search-button').attr('style', "display:none");
   } else {
     console.log("got token for button");
+    $('.field').attr('style');
+    $('.find').removeAttr('style');
+    $('.find').attr('style', "display: block");
     $('#login-button').removeAttr('style');
     $('#login-button').attr('style', "display:none");
     $('#search-button').removeAttr('style');
