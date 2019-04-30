@@ -1,3 +1,19 @@
+body{
+    background: url("../images/background.jpg") 25% 75%;
+    /* background-size: 760px 900px; */
+    position: relative;
+    overflow: hidden;
+} 
+body:before {
+    content: "";
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    z-index: -1;
+    background: url("../images/background.jpg") 25% 75%;
+    -webkit-transform: rotate(90deg);
+    transform: rotate(90deg);
+    }
 #search-button .hide {
     display: none;
 }
@@ -9,6 +25,21 @@
     padding:20px;
 }
 .searchlabel{
-    color:white!important;
+    color:black;
+}
+.title{
+    text-align: center;
+    color:black;
+    height:150px;
+    width:150px;
+    position:relative;
+}
+.titlecont{
+    position: relative;
+}
+.foot{
+    position:fixed!important;
+    bottom:0px;
+    width:100%;
 }
 

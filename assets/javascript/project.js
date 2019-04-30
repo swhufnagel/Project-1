@@ -21,18 +21,21 @@ var redirectUri = window.location.href;
 // var authorizationURL = "https://accounts.spotify.com/authorize?client_id=6ba0c775865d4f34a62198bacaebc943&response_type=token&redirect_uri="+ redirectUri;
 var authorizationToken = ""
 var queryURL = ""
-displayButton()
 getAuthorizationToken()
+displayButton()
 
 function displayButton(){
   // We need someone to get the CSS hide class to work so that only one button shows
   // This is likely being overridden in semantic.css somewhere
-  if (authorizationToken === ""){
-    $('#login-button').removeClass('hide')
-    $('#search-button').addClass('hide')
+  if (authorizationToken === "Bearer "){
+    $('#login-button').attr('style', "display:block");
+    $('#search-button').attr('style', "display:none");
   } else {
-    $('#login-button').addClass('hide')
-    $('#search-button').removeClass('hide')
+    console.log("got token for button");
+    $('#login-button').removeAttr('style');
+    $('#login-button').attr('style', "display:none");
+    $('#search-button').removeAttr('style');
+    $('#search-button').attr('style', "display:block");
   }
 }
 
@@ -52,7 +55,7 @@ function buildQueryURL() {
   // add code here to built out the searchURL
   // the searchType can later be modifed to call the function with different searches
   // ie 'search' or 'seed'
-  queryURL = "https://api.spotify.com/v1/search/q=" + $('#searchTerm').val().trim() + "&type=artist";
+  queryURL = "https://api.spotify.com/v1/search?q=" + $('#searchTerm').val().trim() + "&type=artist";
 
 }
 
@@ -69,7 +72,8 @@ $("#search-button").on("click", function() {
     $.ajax({
       method: "GET",
       beforeSend: function(request) {
-        request.setRequestHeader("Authorization", authorizationToken)
+        request.setRequestHeader("Authorization", authorizationToken);
+        request.setRequestHeader("Accept", "application/json");
       },
       url: queryURL,
     }).then(function(response) {
