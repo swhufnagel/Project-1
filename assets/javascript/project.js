@@ -119,46 +119,6 @@ $("#search-button").on("click", function() {
       // Prepend to HTML
       $('#newTrackRow').prepend(newRow);
 
-/*      // This code is for appending the RECOMMENDED songs to the appropriate table
-      // Variable Declaration/Troubleshooting/Locations
-      // Path for Image
-      var recResultImage
-      // Path for Song Name
-      var recResultTitle
-      // Path for Artist
-      var recResultArtist
-      // Path for Album
-      var recResultAlbum
-      // Path for Duration
-      var recResultDuration
-      
-      // Create Variable for Recommendation Row
-      var recRow = $('<tr>');
-      // Create Play Button
-      var recPlay = $('<td>');
-      recPlay.addClass('recPlay');
-      // Create Recommended Image Tag
-      var recImageTag = $('<td>');
-      recImageTag.addClass('image');
-      var recImage = $('<img>');
-      recImage.addClass('recImage');
-      // recImage.attr('src', ############);
-      // Create Variable for Title <td>
-      var recTitle = $('<td>');
-      recTitle.addClass('recTitle');
-      // Create Variable for Artist Tag
-      var recArtist = $('<td>');
-      recArtist.addClass('recArtist');
-      // Create Variable for Album Tag
-      var recAlbum = $('<td>');
-      recAlbum.addClass('recAlbum');
-      // Create Variable for Duration
-      var recDuration = $('<td>');
-      recDuration.addClass('recDuration');
-      // Create Variable for Add to Playlist
-      var recAdd = $('<td>');
-      recAdd.addClass('recAdd'); */
-
           // Function when the user clicks on a row
           $('tr').on('click', function() {
             console.log('clicked a row');
@@ -212,7 +172,7 @@ $("#search-button").on("click", function() {
               recRow.append(recTitle);
               recRow.append(recArtist);
               recRow.append(recAlbum);
-              $('#recomendations').append(recRow);
+              $('#recommendations').append(recRow);
             }
 
           })
