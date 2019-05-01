@@ -9,8 +9,7 @@ displayButton()
 
 // This function toggles classes to hide/display buttons that make it clear to the user what steps they need to take
 function displayButton(){
-  // We need someone to get the CSS hide class to work so that only one button shows
-  // This is likely being overridden in semantic.css somewhere
+  // Toggle display of login and search button depending on if the user is authenticated
   if (authorizationToken === "Bearer "){
     $('.field').attr('style', "display:none");
     $('.find').attr('style', "display:none");
@@ -38,11 +37,7 @@ function getAuthorizationToken(){
 
 function buildQueryURL() {
   searchTerm = $('#searchTerm').val().trim();
-  // add code here to build out the searchURL
-  // the searchType can later be modifed to call the function with different searches
-  // ie 'search' or 'seed'
   queryURL = "https://api.spotify.com/v1/search?q=" + searchTerm + "&type=artist";
-  
 }
 
 var redirectUri = window.location.href;
@@ -56,10 +51,11 @@ $(document).ready(function(){
   $(".padding").attr("style", "display:none");
   $('.searchTable').attr('style', "display:none");
 })
+
 $("#search-button").on("click", function() {
   buildQueryURL()
     if(searchTerm !== ""){
-      console.log("true");
+      console.log("Show results if a search term exists");
       $('.searchTable').removeAttr("style");
       $('.searchTable').attr('style', "display:block");
     }
@@ -71,138 +67,73 @@ $("#search-button").on("click", function() {
       },
       url: queryURL,
     }).then(function(response) {
-      // console.log('response: ', response);
-
-      // This code is for the direct response table, not for the recommendations table
-      // Variable Definition and Troubleshooting
-      // Name
+      // Display Artists that match what the user searched for
+      $("#newTrackRow").empty()
       for(var resultNum = 0; resultNum < 4; resultNum++){
-      var resultArtist = response.artists.items[resultNum].name;
-      // console.log('name: ', resultArtist);
-      // Image
-      var resultImg = response.artists.items[resultNum].images[0].url;
-      // console.log('image: ', resultImg);
-      // Artist ID:
-      var resultId = response.artists.items[resultNum].id;
-      console.log('artist id: ', resultId);
-      // Popularity Rating: 
-      var resultPopularity = response.artists.items[resultNum].popularity;
-      // console.log('popularity: ', resultPopularity);
-      // Genres: 
-      var resultGenre = response.artists.items[resultNum].genres;
-      // console.log('genres: ', resultGenre);
-
-      // Create variables for pushing to HTML
-      // New Row Variable
-      var newRow = $('<tr>');
-      newRow.attr("data-number", resultId);
-      // New Artist Variable
-      var newArtist = $('<td>');
-      // Add Class to newArtist
-      newArtist.addClass('artist');
-      // Create <td> for img
-      var newImgTag = $('<td>');
-      // Add Class to newImgTag
-      newImgTag.addClass('image');
-      // New Image Variable
-      var newImg = $('<img>');
-      // Add Class to Image
-      newImg.addClass('artistImg');
-      // Store Image in Variable
-      newImg.attr('src', resultImg);
-      // Append newImg to newImgTag
-      newImgTag.append(newImg);
-      // Store Artist Name in variable
-      newArtist.append(resultArtist);
-      // New Genre Variable
-      var newGenre = $('<td class="genre">');
-      for(i = 0; i< response.artists.items[resultNum].genres.length; i++){
-      if(resultGenre[i].indexOf(" ") !== -1){
-        resultGenre[i] = resultGenre[i].replace(" ", "-");
-      }
-      if(resultGenre.length<2){
-        newGenre.append(resultGenre[i].charAt(0).toUpperCase() + resultGenre[i].slice(1) + "");
-      }
-      else{
-        console.log("last" + resultGenre.lastIndexOf());
-        if(i !== resultGenre.lastIndexOf()){
-        newGenre.append(resultGenre[i].charAt(0).toUpperCase() + resultGenre[i].slice(1) + " | ");
+        var resultArtist = response.artists.items[resultNum].name;
+        console.log(response.artists)
+        try {
+          var resultImg = response.artists.items[resultNum].images[0].url;
+        } catch(error) {
+          resultImg = "/assets/images/artistPlaceholder.png"
+          console.log("An image was not found: " + error)
         }
-      }
-      }
-      // New Popularity Variable
-      var newPopularity = $('<td class="popularity">');
-      newPopularity.append(resultPopularity);
-      var newIdtag = $("<td>");
-      newIdtag.addClass("id");
-      newIdtag.append(resultId);
-      // Append to newRow
-      newRow.append(newImg);
-      newRow.append(newArtist);
-      newRow.append(newGenre);
-      newRow.append(newPopularity);
+        
+        // Artist ID
+        var resultId = response.artists.items[resultNum].id;
+        console.log('artist id: ', resultId);
+        var resultPopularity = response.artists.items[resultNum].popularity;
+        var resultGenre = response.artists.items[resultNum].genres;
+        
+        // Create a new <tr> and all <td> needed for the results section
+        var newRow = $('<tr>');
+        newRow.attr("id", resultId);
+        newRow.addClass("search-result")
+        var newArtist = $('<td>');
+        newArtist.addClass('artist');
+        var newImgTag = $('<td>');
+        newImgTag.addClass('image');
+        var newImg = $('<img>');
+        newImg.addClass('artistImg');
+        newImg.attr('src', resultImg);
+        newImgTag.append(newImg);
+        newArtist.append(resultArtist);
+        var newGenre = $('<td class="genre">');
+        for(i = 0; i< response.artists.items[resultNum].genres.length; i++){
+          if(resultGenre[i].indexOf(" ") !== -1){
+            resultGenre[i] = resultGenre[i].replace(" ", "-");
+          }
+          if(resultGenre.length<2){
+            newGenre.append(resultGenre[i].charAt(0).toUpperCase() + resultGenre[i].slice(1) + "");
+          }
+          else{
+            if(i !== resultGenre.lastIndexOf()){
+            newGenre.append(resultGenre[i].charAt(0).toUpperCase() + resultGenre[i].slice(1) + " | ");
+            }
+          }
+        }
+        // New Popularity Variable
+        var newPopularity = $('<td class="popularity">');
+        newPopularity.append(resultPopularity);
+        var newIdtag = $("<td>");
+        // newIdtag.addClass("id");
+        // newIdtag.append(resultId);
+        // Append to newRow
+        newRow.append(newImg);
+        newRow.append(newArtist);
+        newRow.append(newGenre);
+        newRow.append(newPopularity);
 
-      // Prepend to HTML
-
-      $('#newTrackRow').append(newRow);
-      }
-      // This code is for appending the RECOMMENDED songs to the appropriate table
-      // Variable Declaration/Troubleshooting/Locations
-      // Path for Image
-      // var recResultImage
-      // // Path for Song Name
-      // var recResultTitle
-      // // Path for Artist
-      // var recResultArtist
-      // // Path for Album
-      // var recResultAlbum
-      // // Path for Duration
-      // var recResultDuration
-      
-      // // Create Variable for Recommendation Row
-      // var recRow = $('<tr>');
-      // // Create Play Button
-      // var recPlay = $('<td>');
-      // recPlay.addClass('recPlay');
-      // // Create Recommended Image Tag
-      // var recImageTag = ('<td>');
-      // recImageTag.addClass('image');
-      // var recImage = ('<img>');
-      // recImage.addClass('recImage');
-      // // recImage.attr('src', ############);
-      // // Create Variable for Title <td>
-      // var recTitle = $('<td>');
-      // recTitle.addClass('recTitle');
-      // // Create Variable for Artist Tag
-      // var recArtist = $('<td>');
-      // recArtist.addClass('recArtist');
-      // // Create Variable for Album Tag
-      // var recAlbum = $('<td>');
-      // recAlbum.addClass('recAlbum');
-      // // Create Variable for Duration
-      // var recDuration = $('<td>');
-      // recDuration.addClass('recDuration');
-      // // Create Variable for Add to Playlist
-      // var recAdd = $('<td>');
-      // recAdd.addClass('recAdd');
-    	// $(document).ready(function() { 
-      //   $("backgrnd-img").hide();
-      // })
-
-      console.log(response);
-      // Function when the user clicks on a row
-      $(document).on('click', "tr", function() {
-        console.log($(this).attr("data-number"));
-       var id = $(this).attr("data-number");
-      });
-
-      $('#newTrackRow').prepend(newRow);
+        // Append to HTML
+        $('#newTrackRow').append(newRow);
+      }  
 
           // Function when the user clicks on a row
-          $('tr').on('click', function() {
+          // Sample artist ID = 540vIaP2JwjQb9dm3aArA4
+          $('.search-result').on('click', function() {
             console.log('clicked a row');
             var artistId = $(this).attr('id')
-            var queryURL = "https://api.spotify.com/v1/recommendations?limit=10&market=US&seed_artists=540vIaP2JwjQb9dm3aArA4";
+            var queryURL = "https://api.spotify.com/v1/recommendations?limit=10&market=US&seed_artists=" + artistId;
             $.ajax({
               method: "GET",
               beforeSend: function(request) {
@@ -213,38 +144,34 @@ $("#search-button").on("click", function() {
           }).then(function(response){
             console.log(response.tracks[0]);
             for (var i = 0; i < response.tracks.length; i++) {
-                  console.log(response.tracks[i]);
-                    // Create Variable for Recommendation Row
-                    var imageSource = response.tracks[i].album.images[1].url;
-                    var songTitle =  response.tracks[i].name;
-                    var songArtist =  response.tracks[i].artists[0].name;
-                    var albumTitle =  response.tracks[i].album.name;
-                    var recRow = $('<tr>');
+              console.log(response.tracks[i]);
+                  
+              // Create Variables for Recommendation Row
+              var imageSource = response.tracks[i].album.images[1].url;
+              var songTitle =  response.tracks[i].name;
+              var songArtist =  response.tracks[i].artists[0].name;
+              var albumTitle =  response.tracks[i].album.name;
+              var recRow = $('<tr>');
 
-                // Create Variable for Image
-                // var recImage = $('<img>');
-                // recImage.addClass('recImg two wide');
-                // recImage.attr('src', imageSource)
+              // Create Variable for Image <td>
+              var recImage = $('<td>');
+              recImage.addClass('recImg two wide');
+              recImage.append($('<img>').attr('src', imageSource))
 
-                // Create Variable for Image
-                var recImage = $('<td>');
-                recImage.addClass('recImg two wide');
-                recImage.append($('<img>').attr('src', imageSource))
+              // Create Variable for Title <td>
+              var recTitle = $('<td>');
+              recTitle.addClass('recTitle');
+              recTitle.text(songTitle)
 
-                // Create Variable for Title <td>
-                var recTitle = $('<td>');
-                recTitle.addClass('recTitle');
-                recTitle.text(songTitle)
+              // Create Variable for Artist <td>
+              var recArtist = $('<td>');
+              recArtist.addClass('recArtist');
+              recArtist.text(songArtist)
 
-                // Create Variable for Artist Tag
-                var recArtist = $('<td>');
-                recArtist.addClass('recArtist');
-                recArtist.text(songArtist)
-
-                // Create Variable for Album Tag
-                var recAlbum = $('<td>');
-                recAlbum.addClass('recAlbum');
-                recAlbum.text(albumTitle)
+              // Create Variable for Album <td>
+              var recAlbum = $('<td>');
+              recAlbum.addClass('recAlbum');
+              recAlbum.text(albumTitle)
 
               // Append to newRow
               recRow.append(recImage);
@@ -253,7 +180,8 @@ $("#search-button").on("click", function() {
               recRow.append(recAlbum);
               $('#recommendations').append(recRow);
             }
-
+          // Need to unhide stuff here
+          $("#recommended-artists").attr('style', 'display:block')
           })
     });
     });

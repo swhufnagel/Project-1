@@ -17,10 +17,9 @@
 <body>
   <!-- <img src="assets/images/background.jpg"> -->
   <body class = "">
-    
-    <!-- Page Contents -->
+    <!-- Page Content -->
     <div class="navbar">
-    <div class="titlecont"><img class="title" src="assets/images/T.png">undea</div>
+    <div class="titlecont"><img class="title" src="assets/images/T.png"></div>
   </div>
     <div class="vertical center aligned masthead segment mainsection">
         <div class="ui text container">
@@ -35,10 +34,9 @@
           </div>
           <div class="ui huge primary button " id='login-button'>Log In to Spotify!<i class=""></i></div>
           <div class="ui huge primary button hide" style="display:none" id='search-button'>Gimme Tunes!<i class=""></i></div>
-          <!-- <button onclick=“window.location.href =’https://accounts.spotify.com/authorize?client_id=6ba0c775865d4f34a62198bacaebc943&response_type=token&redirect_uri=https://djpowell23.github.io/Project-1/';“>Log in to Spotify</button> -->
         </div>
         <!-- This table pulls results for exactly what you searched for -->
-        <!-- Table for Generated Tracks -->
+        <!-- Search Results -->
         <table id = "searchTab" class="ui selectable inverted table searchTable">
           <thead>
             <tr>
@@ -52,22 +50,15 @@
           <tbody id='newTrackRow'></tbody>
         </table>
 
-        <!-- This Table is for Recommended Tracks -->
-        <table class='ui selectable single line inverted table padding'>
+        <!-- Recommended Tracks -->
+        <table id="recommended-artists" class='ui selectable single line inverted table padding'>
           <thead>
             <th class='recImg two wide'>Img</th>
             <th class='recTitle'>Title</th>
             <th class='recArtist'>Artist</th>
             <th class='recAlbum'>Album</th>
           </thead>
-          <tr id='recommendations'>
-            <!-- Play Button Information -->
-            <!-- https://developer.spotify.com/documentation/web-playback-sdk/reference/ -->
-            <!-- <td class='recImage'></td>
-            <td class='recTitle'></td>
-            <td class='recArtist'></td>
-            <td class='recAlbum'></td> -->
-          </tr>
+          <tr id='recommendations'></tr>
         </table>
       </div>
     
