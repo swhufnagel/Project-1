@@ -36,6 +36,45 @@
           <div class="ui huge primary button hide" style="display:none" id='search-button'>Gimme Tunes!<i class=""></i></div>
           <!-- <button onclick=“window.location.href =’https://accounts.spotify.com/authorize?client_id=6ba0c775865d4f34a62198bacaebc943&response_type=token&redirect_uri=https://djpowell23.github.io/Project-1/';“>Log in to Spotify</button> -->
         </div>
+        <!-- This table pulls results for exactly what you searched for -->
+        <!-- Table for Generated Tracks -->
+        <table class="ui selectable inverted table">
+          <thead>
+            <tr>
+              <th class='three wide image'>Image</th>
+              <th class='artist'>Artist</th>
+              <th class='genre'>Genre</th>
+              <th class='popularity'>Popularity</th>
+            </tr>
+          </thead>
+          <!-- Tracks Populate Here -->
+          <tbody id='newTrackRow'></tbody>
+        </table>
+
+        <!-- This Table is for Recommended Tracks -->
+        <table class='ui selectable single line inverted table'>
+          <thead>
+            <th class='recPlay one wide'>Play</th>
+            <th class='recImg two wide'>Img</th>
+            <th class='recTitle'>Title</th>
+            <th class='recArtist'>Artist</th>
+            <th class='recAlbum'>Album</th>
+            <th class='recDuration one wide'>Duration</th>
+            <th class='recAdd one wide'>Add</th>
+          </thead>
+          <tr>
+            <!-- Play Button Information -->
+            <!-- https://developer.spotify.com/documentation/web-playback-sdk/reference/ -->
+            <td class='recPlay'></td>
+            <td class='recImage'></td>
+            <td class='recTitle'></td>
+            <td class='recArtist'></td>
+            <td class='recAlbum'></td>
+            <td class='recDuration'></td>
+            <td class='recAdd'></td>
+          </tr>
+        </table>
+      </div>
     
       <div class="ui inverted vertical footer segment foot">
           <div class="ui container">

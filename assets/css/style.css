@@ -1,3 +1,4 @@
+
 body{
     background: url("../images/background.jpg") 25% 75%;
     position: relative;
@@ -31,6 +32,28 @@ body{
     padding:0px;
     text-align:center;
     margin-bottom:25px;
+}
+tbody {
+    font-size: 18px;
+}
+
+thead {
+    font-size: 22px;
+    text-align: left;
+}
+
+.artistImg {
+    border: 1px solid black;
+    width: 200px;
+}
+
+table {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+#search-button .hide {
+    display: none;
 }
 .mainsection{
     min-height: 600px;
