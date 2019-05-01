@@ -3,19 +3,27 @@
 var redirectUri = window.location.href;
 var authorizationToken = ""
 var queryURL = ""
-displayButton()
 getAuthorizationToken()
+displayButton()
 
 // This function toggles classes to hide/display buttons that make it clear to the user what steps they need to take
 function displayButton(){
   // We need someone to get the CSS hide class to work so that only one button shows
   // This is likely being overridden in semantic.css somewhere
-  if (authorizationToken === ""){
-    $('#login-button').removeClass('hide')
-    $('#search-button').addClass('hide')
+  if (authorizationToken === "Bearer "){
+    $('.field').attr('style', "display:none");
+    $('.find').attr('style', "display:none");
+    $('#login-button').attr('style', "display:block");
+    $('#search-button').attr('style', "display:none");
   } else {
-    $('#login-button').addClass('hide')
-    $('#search-button').removeClass('hide')
+    console.log("got token for button");
+    $('.field').attr('style');
+    $('.find').removeAttr('style');
+    $('.find').attr('style', "display: block");
+    $('#login-button').removeAttr('style');
+    $('#login-button').attr('style', "display:none");
+    $('#search-button').removeAttr('style');
+    $('#search-button').attr('style', "display:block");
   }
 }
 
@@ -49,7 +57,8 @@ $("#search-button").on("click", function() {
     $.ajax({
       method: "GET",
       beforeSend: function(request) {
-        request.setRequestHeader("Authorization", authorizationToken)
+        request.setRequestHeader("Authorization", authorizationToken);
+        request.setRequestHeader("Accept", "application/json");
       },
       url: queryURL,
     }).then(function(response) {
