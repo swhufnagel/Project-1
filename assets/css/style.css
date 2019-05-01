@@ -1,3 +1,33 @@
+tbody {
+    font-size: 18px;
+}
+
+thead {
+    font-size: 22px;
+    text-align: left;
+}
+
+.artistImg {
+    border: 1px solid black;
+    width: 200px;
+}
+
+table {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
 #search-button .hide {
     display: none;
 }
