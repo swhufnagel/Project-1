@@ -3,7 +3,7 @@
 var redirectUri = window.location.href;
 var authorizationToken = "";
 var queryURL = "";
-var searchTerm = $('#searchTerm').val().trim();
+var searchTerm = $('#searchTerm').val().trim().toLowerCase();
 getAuthorizationToken()
 displayButton()
 
@@ -41,7 +41,9 @@ function buildQueryURL() {
 }
 
 var redirectUri = window.location.href;
+if(redirectUri !== "https://djpowell23.github.io/Project-1/"){
 redirectUri = redirectUri.substring(0, redirectUri.length -1); // Used to truncate a trailing / (slash) so the login click handler works correctly
+}
 $('#login-button').on('click', function(){
   window.location.href = 'https://accounts.spotify.com/authorize?client_id=6ba0c775865d4f34a62198bacaebc943&response_type=token&redirect_uri=' + redirectUri;
 })
@@ -69,9 +71,12 @@ $("#search-button").on("click", function() {
     }).then(function(response) {
       // Display Artists that match what the user searched for
       $("#newTrackRow").empty()
-      for(var resultNum = 0; resultNum < 4; resultNum++){
+      var limit = response.artists.items.length;
+      if(limit > 4){
+        limit = 4;
+      }
+      for(var resultNum = 0; resultNum < limit; resultNum++){
         var resultArtist = response.artists.items[resultNum].name;
-        console.log(response.artists)
         try {
           var resultImg = response.artists.items[resultNum].images[0].url;
         } catch(error) {
@@ -106,16 +111,14 @@ $("#search-button").on("click", function() {
           if(resultGenre.length<2){
             newGenre.append(resultGenre[i].charAt(0).toUpperCase() + resultGenre[i].slice(1) + "");
           }
-          else{
-            if(i !== resultGenre.lastIndexOf()){
+          else if(i !== (response.artists.items[resultNum].genres.length - 1)){
             newGenre.append(resultGenre[i].charAt(0).toUpperCase() + resultGenre[i].slice(1) + " | ");
             }
-          }
         }
         // New Popularity Variable
         var newPopularity = $('<td class="popularity">');
         newPopularity.append(resultPopularity);
-        var newIdtag = $("<td>");
+        // var newIdtag = $("<td>");
         // newIdtag.addClass("id");
         // newIdtag.append(resultId);
         // Append to newRow
@@ -132,6 +135,10 @@ $("#search-button").on("click", function() {
           // Sample artist ID = 540vIaP2JwjQb9dm3aArA4
           $('.search-result').on('click', function() {
             console.log('clicked a row');
+
+            $('.searchTable').removeAttr("style");
+            $('.searchTable').attr('style', "display:none");
+
             var artistId = $(this).attr('id')
             var queryURL = "https://api.spotify.com/v1/recommendations?limit=10&market=US&seed_artists=" + artistId;
             $.ajax({
@@ -144,8 +151,7 @@ $("#search-button").on("click", function() {
           }).then(function(response){
             console.log(response.tracks[0]);
             for (var i = 0; i < response.tracks.length; i++) {
-              console.log(response.tracks[i]);
-                  
+              console.log(response.tracks[i]);    
               // Create Variables for Recommendation Row
               var imageSource = response.tracks[i].album.images[1].url;
               var songTitle =  response.tracks[i].name;
@@ -154,9 +160,9 @@ $("#search-button").on("click", function() {
               var recRow = $('<tr>');
 
               // Create Variable for Image <td>
-              var recImage = $('<td>');
-              recImage.addClass('recImg two wide');
-              recImage.append($('<img>').attr('src', imageSource))
+              var recImage = $('<img>').attr('src', imageSource)
+              recImage.addClass('recImg');
+              // recImage.append($('<img>').attr('src', imageSource))
 
               // Create Variable for Title <td>
               var recTitle = $('<td>');

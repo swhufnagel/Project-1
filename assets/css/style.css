@@ -1,24 +1,9 @@
 
 body{
-    background: url("../images/background.jpg") 25% 75% no-repeat;
-    background-size:cover;
-    background-position: center center;
+    background: url("../images/background.jpg") 25% 0% no-repeat;
     position: relative;
-    overflow: auto;
-    width:100%; height:100%;
+    overflow: auto; 
 } 
-/* body:before {
-    content: "";
-    position: absolute;
-    width: 200%;
-    height: 200%;
-    top: -27%;
-    left: -50%;
-    z-index: -1;
-    background: url("../images/background.jpg") 25% 75%;
-    -webkit-transform: rotate(180deg);
-    transform: rotate(180deg);
-} */
 .title{
     text-align: center;
     color:white;
@@ -45,7 +30,7 @@ thead {
     text-align: left;
 }
 
-.artistImg {
+.artistImg, .recImg {
     border: 1px solid black;
     width: 200px;
 }
@@ -93,14 +78,23 @@ table {
 .searchlabel{
     color:black;
 }
-.padding{
-   padding: 10px;
-}
 #searchTab{
     width:85%;
     margin: 10px;
     margin-left:auto;
     margin-right:auto;
+    margin-bottom:70px;
+    max-height: 400px;
+    overflow:scroll;
+}
+#recommended-artists{
+    width:85%;
+    margin: 10px;
+    margin-left:auto;
+    margin-right:auto;
+    margin-bottom:70px;
+    max-height: 400px;
+    overflow:scroll;
 }
 .foot{
     position:fixed!important;
