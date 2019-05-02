@@ -175,8 +175,17 @@ $("#search-button").on("click", function() {
               var recAlbum = $('<td>');
               recAlbum.addClass('recAlbum');
               recAlbum.text(albumTitle)
-
+              var recPlay = $('<td>');
+              var playUri = response.tracks[i].uri;
+              playUri = playUri.substring(playUri.lastIndexOf(":")+1);
+              var src = "https://open.spotify.com/embed/track/" + playUri
+              console.log(response);
+              console.log(playUri);
+              var player = $('<iframe width="300" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>')
+              player.attr("src", src)
+              recPlay.append(player);
               // Append to newRow
+              recRow.append(recPlay);
               recRow.append(recImage);
               recRow.append(recTitle);
               recRow.append(recArtist);
