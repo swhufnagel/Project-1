@@ -104,6 +104,7 @@ $("#search-button").on("click", function() {
         newImgTag.append(newImg);
         newArtist.append(resultArtist);
         var newGenre = $('<td class="genre">');
+        // Styling the items in genres array from Spotify
         for(i = 0; i< response.artists.items[resultNum].genres.length; i++){
           if(resultGenre[i].indexOf(" ") !== -1){
             resultGenre[i] = resultGenre[i].replace(" ", "-");
@@ -115,9 +116,6 @@ $("#search-button").on("click", function() {
             newGenre.append(resultGenre[i].charAt(0).toUpperCase() + resultGenre[i].slice(1) + " | ");
             }
         }
-        // New Popularity Variable
-        var newPopularity = $('<td class="popularity">');
-        newPopularity.append(resultPopularity);
         // var newIdtag = $("<td>");
         // newIdtag.addClass("id");
         // newIdtag.append(resultId);
@@ -125,7 +123,6 @@ $("#search-button").on("click", function() {
         newRow.append(newImg);
         newRow.append(newArtist);
         newRow.append(newGenre);
-        newRow.append(newPopularity);
 
         // Append to HTML
         $('#newTrackRow').append(newRow);

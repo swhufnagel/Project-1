@@ -25,8 +25,16 @@ tbody {
     font-size: 18px;
 }
 
+table td
+{
+    text-align: left;
+    vertical-align: middle;
+    padding: 5px;
+    position: relative;
+}
+
 thead {
-    font-size: 22px;
+    font-size: 28px;
     text-align: left;
 }
 
