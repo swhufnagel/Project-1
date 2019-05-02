@@ -39,12 +39,9 @@
         <!-- Search Results -->
         <table id = "searchTab" class="ui selectable inverted table searchTable">
           <thead>
-            <tr>
               <th class='three wide image'>Image</th>
               <th class='artist'>Artist</th>
               <th class='genre'>Genre</th>
-              <th class='popularity'>Popularity</th>
-            </tr>
           </thead>
           <!-- Tracks Populate Here -->
           <tbody id='newTrackRow'></tbody>
@@ -53,12 +50,13 @@
         <!-- Recommended Tracks -->
         <table id="recommended-artists" class='ui selectable single line inverted table padding'>
           <thead id="thead">
-            <th class='recImg two wide'></th>
-            <th class='recTitle'>Title</th>
+            <th class='three wide image'>Image</th>
+            <th class='three wide recTitle'>Title</th>
             <th class='recArtist'>Artist</th>
             <th class='recAlbum'>Album</th>
           </thead>
-          <tr id='recommendations'></tr>
+          <!-- Recommended Tracks Populate Here -->
+          <tbody id='recommendations'></tbody>
         </table>
       </div>
     
