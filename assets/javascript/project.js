@@ -60,6 +60,8 @@ $("#search-button").on("click", function() {
       console.log("Show results if a search term exists");
       $('.searchTable').removeAttr("style");
       $('.searchTable').attr('style', "display:block");
+      $('#recommended-artists').removeAttr("style");
+      $('#recommended-artists').attr('style', "display:none");
     }
     $.ajax({
       method: "GET",
@@ -96,12 +98,12 @@ $("#search-button").on("click", function() {
         newRow.addClass("search-result")
         var newArtist = $('<td>');
         newArtist.addClass('artist');
-        var newImgTag = $('<td>');
-        newImgTag.addClass('image');
+        // var newImgTag = $('<td>');
+        // newImgTag.addClass('image');
         var newImg = $('<img>');
         newImg.addClass('artistImg');
         newImg.attr('src', resultImg);
-        newImgTag.append(newImg);
+        // newImgTag.append(newImg);
         newArtist.append(resultArtist);
         var newGenre = $('<td class="genre">');
         // Styling the items in genres array from Spotify
@@ -131,12 +133,9 @@ $("#search-button").on("click", function() {
           // Function when the user clicks on a row
           // Sample artist ID = 540vIaP2JwjQb9dm3aArA4
           $('.search-result').on('click', function() {
-            console.log('clicked a row');
-
             $('.searchTable').removeAttr("style");
             $('.searchTable').attr('style', "display:none");
-
-            var artistId = $(this).attr('id')
+            var artistId = $(this).attr('id');
             var queryURL = "https://api.spotify.com/v1/recommendations?limit=10&market=US&seed_artists=" + artistId;
             $.ajax({
               method: "GET",
@@ -146,7 +145,7 @@ $("#search-button").on("click", function() {
               },
               url: queryURL,
           }).then(function(response){
-            console.log(response.tracks[0]);
+            $('#recommendations').empty();
             for (var i = 0; i < response.tracks.length; i++) {
               console.log(response.tracks[i]);    
               // Create Variables for Recommendation Row
@@ -155,6 +154,7 @@ $("#search-button").on("click", function() {
               var songArtist =  response.tracks[i].artists[0].name;
               var albumTitle =  response.tracks[i].album.name;
               var recRow = $('<tr>');
+              recRow.addClass("recRow")
 
               // Create Variable for Image <td>
               var recImage = $('<img>').attr('src', imageSource)
