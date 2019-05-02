@@ -41,6 +41,7 @@ thead {
 .artistImg, .recImg {
     border: 1px solid black;
     width: 200px;
+    height:175px;
 }
 
 table {
@@ -93,7 +94,7 @@ table {
     margin-right:auto;
     margin-bottom:70px;
     max-height: 400px;
-    overflow:scroll;
+    overflow:auto;
 }
 #recommended-artists{
     width:85%;
@@ -102,7 +103,7 @@ table {
     margin-right:auto;
     margin-bottom:70px;
     max-height: 400px;
-    overflow:scroll;
+    overflow:auto;
 }
 .foot{
     position:fixed!important;
