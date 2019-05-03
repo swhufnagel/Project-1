@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.11/semantic.min.css"></link>
   <link rel="stylesheet" href="assets/css/style.css">
   <link rel="stylesheet" href="assets/css/reset.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
   <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
   <script
       src="https://code.jquery.com/jquery-3.1.1.min.js"
@@ -49,12 +50,14 @@
         </table>
 
         <!-- Recommended Tracks -->
-        <table id="recommended-artists" class='ui celled selectable single line inverted table padding'>
-          <thead>
+        <table id="recommended-artists" class='ui celled single line inverted table padding'>
+          <thead id="thead">
+            <th class='favorite'>Add to Library</th>
             <th class='two wide column song'>Song</th>
             <th class='five wide column recTitle' id='title'>Title</th>
             <th class='five wide column recArtist' id='artist'>Artist</th>
             <th class='four wide column recAlbum' id='album'>Album</th>
+
           </thead>
           <!-- Recommended Tracks Populate Here -->
           <tbody id='recommendations'></tbody>

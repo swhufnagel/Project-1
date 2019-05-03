@@ -100,6 +100,10 @@ table {
     max-height: 400px;
     overflow:auto;
 }
+#favorite{
+    margin-left:40%;
+    color: rgba(139, 251, 255, 0.836);
+}
 #recommended-artists{
     width:85%;
     margin: 10px;
