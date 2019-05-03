@@ -33,6 +33,7 @@ function getAuthorizationToken(){
   var returnedAuthorizationToken = location.hash.substr(1)
   authorizationToken = "Bearer " + returnedAuthorizationToken.substring(returnedAuthorizationToken.indexOf("=")+1, returnedAuthorizationToken.indexOf("&"));
   console.log(authorizationToken)
+  location.hash = ""
 }
 
 function buildQueryURL() {
@@ -57,7 +58,6 @@ $(document).ready(function(){
 $("#search-button").on("click", function() {
   buildQueryURL()
     if(searchTerm !== ""){
-      console.log("Show results if a search term exists");
       $('.searchTable').removeAttr("style");
       $('.searchTable').attr('style', "display:block");
     }
@@ -68,7 +68,13 @@ $("#search-button").on("click", function() {
         request.setRequestHeader("Accept", "application/json");
       },
       url: queryURL,
-    }).then(function(response) {
+    }).fail(function(jqXHR, textStatus, errorThrown){
+      console.log(jqXHR);
+      console.log(textStatus);
+      console.log(errorThrown);
+      location.reload();
+    })
+    .done(function(response) {
       // Display Artists that match what the user searched for
       $("#newTrackRow").empty()
       var limit = response.artists.items.length;
@@ -130,25 +136,26 @@ $("#search-button").on("click", function() {
         // Append to HTML
         $('#newTrackRow').append(newRow);
       }  
-
           // Function when the user clicks on a row
           // Sample artist ID = 540vIaP2JwjQb9dm3aArA4
           $('.search-result').on('click', function() {
-            console.log('clicked a row');
-
-            $('.searchTable').removeAttr("style");
-            $('.searchTable').attr('style', "display:none");
-
+          $('.searchTable').removeAttr("style");
+          $('.searchTable').attr('style', "display:none");
             var artistId = $(this).attr('id')
             var queryURL = "https://api.spotify.com/v1/recommendations?limit=10&market=US&seed_artists=" + artistId;
-            $.ajax({
-              method: "GET",
-              beforeSend: function(request) {
-                request.setRequestHeader("Authorization", authorizationToken);
-                request.setRequestHeader("Accept", "application/json");
-              },
-              url: queryURL,
-          }).then(function(response){
+          $.ajax({
+            method: "GET",
+            beforeSend: function(request) {
+              request.setRequestHeader("Authorization", authorizationToken);
+              request.setRequestHeader("Accept", "application/json");
+            },
+            url: queryURL,
+          }).fail(function(jqXHR, textStatus, errorThrown){
+            console.log(jqXHR);
+            console.log(textStatus);
+            console.log(errorThrown);
+            location.reload();
+          }).done(function(response, textStatus, jqXHR){
             console.log(response.tracks[0]);
             for (var i = 0; i < response.tracks.length; i++) {
               console.log(response.tracks[i]);    
