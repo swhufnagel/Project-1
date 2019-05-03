@@ -4,6 +4,7 @@ var redirectUri = window.location.href;
 var authorizationToken = "";
 var queryURL = "";
 var searchTerm = $('#searchTerm').val().trim().toLowerCase();
+var favButton;
 getAuthorizationToken()
 displayButton()
 
@@ -33,6 +34,7 @@ function getAuthorizationToken(){
   var returnedAuthorizationToken = location.hash.substr(1)
   authorizationToken = "Bearer " + returnedAuthorizationToken.substring(returnedAuthorizationToken.indexOf("=")+1, returnedAuthorizationToken.indexOf("&"));
   console.log(authorizationToken)
+  location.hash = "";
 }
 
 function buildQueryURL() {
@@ -45,19 +47,16 @@ if(redirectUri !== "https://djpowell23.github.io/Project-1/"){
 redirectUri = redirectUri.substring(0, redirectUri.length -1); // Used to truncate a trailing / (slash) so the login click handler works correctly
 }
 $('#login-button').on('click', function(){
-  window.location.href = 'https://accounts.spotify.com/authorize?client_id=6ba0c775865d4f34a62198bacaebc943&response_type=token&redirect_uri=' + redirectUri;
+  var scope = "user-library-modify";
+  window.location.href = 'https://accounts.spotify.com/authorize?client_id=6ba0c775865d4f34a62198bacaebc943&response_type=token&scope=' + encodeURIComponent(scope) +'&redirect_uri=' + redirectUri;
 })
-console.log(redirectUri);
-
 $(document).ready(function(){
   $(".padding").attr("style", "display:none");
   $('.searchTable').attr('style', "display:none");
 })
-
 $("#search-button").on("click", function() {
   buildQueryURL()
     if(searchTerm !== ""){
-      console.log("Show results if a search term exists");
       $('.searchTable').removeAttr("style");
       $('.searchTable').attr('style', "display:block");
       $('#recommended-artists').removeAttr("style");
@@ -91,7 +90,6 @@ $("#search-button").on("click", function() {
         
         // Artist ID
         var resultId = response.artists.items[resultNum].id;
-        console.log('artist id: ', resultId);
         var resultPopularity = response.artists.items[resultNum].popularity;
         var resultGenre = response.artists.items[resultNum].genres;
         
@@ -148,9 +146,7 @@ $("#search-button").on("click", function() {
               },
               url: queryURL,
           }).fail(function(jqXHR, textStatus, errorThrown){
-            console.log(jqXHR);
-            console.log(textStatus);
-            console.log(errorThrown);
+    
             location.reload();
           }).done(function(response){
             $('#recommendations').empty();
@@ -165,7 +161,12 @@ $("#search-button").on("click", function() {
               var albumTitle =  response.tracks[i].album.name;
               var recRow = $('<tr>');
               recRow.addClass("recRow")
-
+              var favCol = $("<td>");
+              favButton = $("<i>");
+              favButton.addClass("far fa-heart");
+              favButton.attr("id", "favorite");
+              favButton.attr("song-id", response.tracks[i].id);
+              favCol.append(favButton);
               // Create Variable for Image <td>
               var recImage = $('<img>').attr('src', imageSource)
               recImage.addClass('recImg');
@@ -189,14 +190,12 @@ $("#search-button").on("click", function() {
               var playUri = response.tracks[i].uri;
               playUri = playUri.substring(playUri.lastIndexOf(":")+1);
               var src = "https://open.spotify.com/embed/track/" + playUri
-              console.log(response);
-              console.log(playUri);
-              var player = $('<iframe width="80" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>')
-              player.attr("src", src)
+              var player = $('<iframe width="80" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>');
+              player.attr("src", src);
               recPlay.append(player);
               // Append to newRow
+              recRow.append(favCol);
               recRow.append(recPlay);
-              // recRow.append(recImage);
               recRow.append(recTitle);
               recRow.append(recArtist);
               recRow.append(recAlbum);
@@ -206,6 +205,25 @@ $("#search-button").on("click", function() {
           $("#recommended-artists").attr('style', 'display:block')
           })
     });
+    $(document).on("click", "#favorite", function(){
+      $(this).removeClass("far fa-heart");
+      $(this).addClass("fas fa-heart");
+      console.log($(this).attr("song-id"));
+      queryURL = "https://api.spotify.com/v1/me/tracks?ids=" + $(this).attr("song-id");
+    $.ajax({
+      method: "PUT",
+      beforeSend: function(request) {
+        request.setRequestHeader("Authorization", authorizationToken);
+        request.setRequestHeader("Accept", "application/json");
+      },
+      url: queryURL,
+  }).fail(function(jqXHR, textStatus, errorThrown){
+    // location.reload();
+    console.log(errorThrown);
+  }).done(function(){
+console.log("did it");
+  })
+})
     });
   });
 
