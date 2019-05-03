@@ -33,7 +33,15 @@ table td
     position: relative;
 }
 
+.ui.table thead tr:first-child > th {
+    background-color: black;
+    position: sticky ;
+    top: 0;
+    z-index: 2;
+}
+
 thead {
+    background-color: black;
     font-size: 28px;
     text-align: left;
 }
