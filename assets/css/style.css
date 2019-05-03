@@ -91,6 +91,12 @@ table {
 .searchlabel{
     color:black;
 }
+.padding{
+    display:none;
+}
+.searchTable{
+    display:none;
+}
 #searchTab{
     width:85%;
     margin: 10px;
@@ -98,6 +104,7 @@ table {
     margin-right:auto;
     margin-bottom:70px;
     max-height: 400px;
+    max-width: 900px;
     overflow:auto;
 }
 #favorite{
@@ -111,6 +118,7 @@ table {
     margin-right:auto;
     margin-bottom:70px;
     max-height: 400px;
+    max-width: 900px;
     overflow:auto;
 }
 .foot{
@@ -119,3 +127,38 @@ table {
     width:100%;
 }
 
+
+@media only screen and (max-width: 768px){
+
+#imageCol{max-width:33%;float:left;margin-right:5%;}
+#artistCol{max-width:33%;float:left;margin-right:10%;}
+#genreCol{max-width:33%;float:left;display:none!important;}
+#artistPic{height:60px;width:60px;float:left;margin-left:2%;}
+#artistText{max-width:33%;float:left;margin-left:4%;}
+#genreText{max-width:33%;display:none!important;}
+.searchResult{min-height:80px!important;}
+.ui.table:not(.unstackable)tr{min-height:50px;}
+#rowFixed{height:40px;}
+
+#playSong{width: 350px;}
+#songHead{max-width:50%;float:left;}
+#favoriteHead{min-width:23%;max-width:50%;float:left;}
+#favoriteCol{min-width:30%;max-width:50%;float:left;margin-top: 30px;}
+#playerCol{max-width:50%;}
+#favorite {margin-left: 20%;}
+#recTitle{display:none!important;}
+#recArtist{display:none!important;}
+#recAlbum{display:none!important;}
+#rowFix{height:40px;}
+}
+@media only screen and (max-width: 610px){
+#recommended-artists{
+    margin-bottom:90px;
+}
+#playSong {
+    width: 230px;
+}
+#favoriteCol{min-width:25%;}
+#favoriteHead{font-size:12px;}
+#songHead{font-size:14px;}
+}

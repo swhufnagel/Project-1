@@ -41,9 +41,13 @@
         <!-- Search Results -->
         <table id = "searchTab" class="ui celled selectable inverted table searchTable">
           <thead>
-              <th class='two wide column image'>Image</th>
-              <th class='seven wide column artist'>Artist</th>
-              <th class='seven wide column genre'>Genre</th>
+
+            <tr id="rowFixed">
+              <th id="imageCol" class='two wide column image'>Image</th>
+              <th id="artistCol" class='seven wide column artist'>Artist</th>
+              <th id="genreCol" class='seven wide column genre'>Genre</th>
+            </tr>
+
           </thead>
           <!-- Tracks Populate Here -->
           <tbody id='newTrackRow'></tbody>
@@ -52,11 +56,14 @@
         <!-- Recommended Tracks -->
         <table id="recommended-artists" class='ui celled single line inverted table padding'>
           <thead id="thead">
-            <th class='favorite'>Add to Library</th>
-            <th class='two wide column song'>Song</th>
-            <th class='five wide column recTitle' id='title'>Title</th>
-            <th class='five wide column recArtist' id='artist'>Artist</th>
-            <th class='four wide column recAlbum' id='album'>Album</th>
+
+            <tr id="rowFix">
+            <th id='favoriteHead' class='two wide column favorite'>Add to Library</th>
+            <th id='songHead'class='two wide column song'>Song</th>
+            <th id='recTitle' class='four wide column recTitle'>Title</th>
+            <th id='recArtist' class='four wide column recArtist'>Artist</th>
+            <th id='recAlbum' class='four wide recAlbum'>Album</th>
+          </tr>
 
           </thead>
           <!-- Recommended Tracks Populate Here -->
