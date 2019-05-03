@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="assets/css/style.css">
   <link rel="stylesheet" href="assets/css/reset.css">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+  <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
   <script
       src="https://code.jquery.com/jquery-3.1.1.min.js"
       integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
@@ -38,25 +39,25 @@
         </div>
         <!-- This table pulls results for exactly what you searched for -->
         <!-- Search Results -->
-        <table id = "searchTab" class="ui selectable inverted table searchTable">
+        <table id = "searchTab" class="ui celled selectable inverted table searchTable">
           <thead>
-              <th class='three wide image'>Image</th>
-              <th class='artist'>Artist</th>
-              <th class='genre'>Genre</th>
+              <th class='two wide column image'>Image</th>
+              <th class='seven wide column artist'>Artist</th>
+              <th class='seven wide column genre'>Genre</th>
           </thead>
           <!-- Tracks Populate Here -->
           <tbody id='newTrackRow'></tbody>
         </table>
 
         <!-- Recommended Tracks -->
-        <table id="recommended-artists" class='ui selectable single line inverted table padding'>
+        <table id="recommended-artists" class='ui celled single line inverted table padding'>
           <thead id="thead">
             <th class='favorite'>Add to Library</th>
-            <th class='song'>Song</th>
-            <!-- <th class='three wide image'>Image</th> -->
-            <th class='three wide recTitle'>Title</th>
-            <th class='recArtist'>Artist</th>
-            <th class='recAlbum'>Album</th>
+            <th class='two wide column song'>Song</th>
+            <th class='five wide column recTitle' id='title'>Title</th>
+            <th class='five wide column recArtist' id='artist'>Artist</th>
+            <th class='four wide column recAlbum' id='album'>Album</th>
+
           </thead>
           <!-- Recommended Tracks Populate Here -->
           <tbody id='recommendations'></tbody>
