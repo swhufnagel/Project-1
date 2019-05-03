@@ -14,7 +14,7 @@ The Tundea application uses several Spotify APIs to let users search for an arti
 -- The team used node/express with the 'npx serve' terminal command to run the local webserver.  We originally used the command: npx http-server -p 8081 but ran into issues with a last minute security setting that required Plan B.
 
 ## Technologies Used
-- Spotify API
+- Spotify APIs
 - OAuth
 - Semantic CSS library
 
