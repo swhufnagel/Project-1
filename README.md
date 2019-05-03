@@ -1,19 +1,21 @@
 # Tunedea
 
-The Tundea application uses several Spotify APIs to let users search for an artist and retrieve listening recommendations based on the artist searched for.  The application can easily be expanded to allow users to search for songs/tracked.
-
 ## Team Members
 - Josh Moganfield
 - Devin Powell
 - Jim Clark
 - Sean Hufnagel
 
+## Application Overview
+The Tundea application uses several Spotify APIs to let users search for an artist and retrieve listening recommendations based on the artist searched for.  The user can play the song to see if they like it and they can save the song to their spotify account if they like it. The application can easily be expanded to allow users to search for songs/tracks.
+
 ## Setup Instructions
 - A local server is needed for the callback API to work correctly.
--- The team used node/express for the local webserver with the command: npx http-server -p 8081
+-- The team used node/express with the 'npx serve' terminal command to run the local webserver.  We originally used the command: npx http-server -p 8081 but ran into issues with a last minute security setting that required Plan B.
 
 ## Technologies Used
 - Spotify API
+- OAuth
 - Semantic CSS library
 
 ## User Flow
@@ -31,3 +33,4 @@ The Tundea application uses several Spotify APIs to let users search for an arti
 ## Future Enhancements
 - Create a new playlist based on recommendations that the user selected
 - Ability to search and get recommendations based on tracks in addition to artists
+- Pull Lyrics from another API and display them on the screen for the song that is being played
