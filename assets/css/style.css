@@ -38,6 +38,10 @@ thead {
     text-align: left;
 }
 
+#title, #artist, #album {
+    min-width: 22vw;
+}
+
 .artistImg, .recImg {
     border: 1px solid black;
     width: 200px;
