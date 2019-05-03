@@ -40,9 +40,11 @@
         <!-- Search Results -->
         <table id = "searchTab" class="ui selectable inverted table searchTable">
           <thead>
-              <th class='three wide image'>Image</th>
-              <th class='artist'>Artist</th>
-              <th class='genre'>Genre</th>
+            <tr id="rowFixed">
+              <th id="imageCol" class='three wide image'>Image</th>
+              <th id="artistCol" class='artist'>Artist</th>
+              <th id="genreCol" class='genre'>Genre</th>
+            </tr>
           </thead>
           <!-- Tracks Populate Here -->
           <tbody id='newTrackRow'></tbody>
@@ -51,12 +53,14 @@
         <!-- Recommended Tracks -->
         <table id="recommended-artists" class='ui selectable single line inverted table padding'>
           <thead id="thead">
-            <th class='favorite'>Add to Library</th>
-            <th class='song'>Song</th>
+            <tr id="rowFix">
+            <th id='favoriteHead' class='favorite'>Add to Library</th>
+            <th id='songHead'class='song'>Song</th>
             <!-- <th class='three wide image'>Image</th> -->
-            <th class='three wide recTitle'>Title</th>
-            <th class='recArtist'>Artist</th>
-            <th class='recAlbum'>Album</th>
+            <th id='recTitle' class='three wide recTitle'>Title</th>
+            <th id='recArtist' class='recArtist'>Artist</th>
+            <th id='recAlbum' class='recAlbum'>Album</th>
+          </tr>
           </thead>
           <!-- Recommended Tracks Populate Here -->
           <tbody id='recommendations'></tbody>
