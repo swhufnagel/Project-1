@@ -37,24 +37,23 @@
         </div>
         <!-- This table pulls results for exactly what you searched for -->
         <!-- Search Results -->
-        <table id = "searchTab" class="ui selectable inverted table searchTable">
+        <table id = "searchTab" class="ui celled selectable inverted table searchTable">
           <thead>
-              <th class='two wide image'>Image</th>
-              <th class='seven wide artist'>Artist</th>
-              <th class='seven wide genre'>Genre</th>
+              <th class='two wide column image'>Image</th>
+              <th class='seven wide column artist'>Artist</th>
+              <th class='seven wide column genre'>Genre</th>
           </thead>
           <!-- Tracks Populate Here -->
           <tbody id='newTrackRow'></tbody>
         </table>
 
         <!-- Recommended Tracks -->
-        <table id="recommended-artists" class='ui selectable single line inverted table padding'>
-          <thead id="thead">
-            <th class='two wide song'>Song</th>
-            <!-- <th class='three wide image'>Image</th> -->
-            <th class='five wide recTitle'>Title</th>
-            <th class='five wide recArtist'>Artist</th>
-            <th class='four wide recAlbum'>Album</th>
+        <table id="recommended-artists" class='ui celled selectable single line inverted table padding'>
+          <thead>
+            <th class='two wide column song'>Song</th>
+            <th class='five wide column recTitle' id='title'>Title</th>
+            <th class='five wide column recArtist' id='artist'>Artist</th>
+            <th class='four wide column recAlbum' id='album'>Album</th>
           </thead>
           <!-- Recommended Tracks Populate Here -->
           <tbody id='recommendations'></tbody>

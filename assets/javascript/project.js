@@ -196,7 +196,6 @@ $("#search-button").on("click", function() {
               recPlay.append(player);
               // Append to newRow
               recRow.append(recPlay);
-              // recRow.append(recImage);
               recRow.append(recTitle);
               recRow.append(recArtist);
               recRow.append(recAlbum);
