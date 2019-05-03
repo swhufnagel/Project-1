@@ -70,7 +70,10 @@ $("#search-button").on("click", function() {
         request.setRequestHeader("Accept", "application/json");
       },
       url: queryURL,
-    }).then(function(response) {
+    }).fail(function(jqXHR, textStatus, errorThrown){
+
+      location.reload();
+    }).done(function(response) {
       // Display Artists that match what the user searched for
       $("#newTrackRow").empty()
       var limit = response.artists.items.length;
@@ -144,7 +147,12 @@ $("#search-button").on("click", function() {
                 request.setRequestHeader("Accept", "application/json");
               },
               url: queryURL,
-          }).then(function(response){
+          }).fail(function(jqXHR, textStatus, errorThrown){
+            console.log(jqXHR);
+            console.log(textStatus);
+            console.log(errorThrown);
+            location.reload();
+          }).done(function(response){
             $('#recommendations').empty();
             for (var i = 0; i < response.tracks.length; i++) {
               console.log(response.tracks[i]);    
