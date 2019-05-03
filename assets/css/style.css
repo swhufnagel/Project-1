@@ -25,14 +25,23 @@ tbody {
     font-size: 18px;
 }
 
+table td
+{
+    text-align: left;
+    vertical-align: middle;
+    padding: 5px;
+    position: relative;
+}
+
 thead {
-    font-size: 22px;
+    font-size: 28px;
     text-align: left;
 }
 
 .artistImg, .recImg {
     border: 1px solid black;
     width: 200px;
+    height:175px;
 }
 
 table {
@@ -85,7 +94,7 @@ table {
     margin-right:auto;
     margin-bottom:70px;
     max-height: 400px;
-    overflow:scroll;
+    overflow:auto;
 }
 #recommended-artists{
     width:85%;
@@ -94,7 +103,7 @@ table {
     margin-right:auto;
     margin-bottom:70px;
     max-height: 400px;
-    overflow:scroll;
+    overflow:auto;
 }
 .foot{
     position:fixed!important;

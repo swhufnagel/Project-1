@@ -60,6 +60,8 @@ $("#search-button").on("click", function() {
     if(searchTerm !== ""){
       $('.searchTable').removeAttr("style");
       $('.searchTable').attr('style', "display:block");
+      $('#recommended-artists').removeAttr("style");
+      $('#recommended-artists').attr('style', "display:none");
     }
     $.ajax({
       method: "GET",
@@ -102,14 +104,15 @@ $("#search-button").on("click", function() {
         newRow.addClass("search-result")
         var newArtist = $('<td>');
         newArtist.addClass('artist');
-        var newImgTag = $('<td>');
-        newImgTag.addClass('image');
+        // var newImgTag = $('<td>');
+        // newImgTag.addClass('image');
         var newImg = $('<img>');
         newImg.addClass('artistImg');
         newImg.attr('src', resultImg);
-        newImgTag.append(newImg);
+        // newImgTag.append(newImg);
         newArtist.append(resultArtist);
         var newGenre = $('<td class="genre">');
+        // Styling the items in genres array from Spotify
         for(i = 0; i< response.artists.items[resultNum].genres.length; i++){
           if(resultGenre[i].indexOf(" ") !== -1){
             resultGenre[i] = resultGenre[i].replace(" ", "-");
@@ -121,9 +124,6 @@ $("#search-button").on("click", function() {
             newGenre.append(resultGenre[i].charAt(0).toUpperCase() + resultGenre[i].slice(1) + " | ");
             }
         }
-        // New Popularity Variable
-        var newPopularity = $('<td class="popularity">');
-        newPopularity.append(resultPopularity);
         // var newIdtag = $("<td>");
         // newIdtag.addClass("id");
         // newIdtag.append(resultId);
@@ -131,7 +131,6 @@ $("#search-button").on("click", function() {
         newRow.append(newImg);
         newRow.append(newArtist);
         newRow.append(newGenre);
-        newRow.append(newPopularity);
 
         // Append to HTML
         $('#newTrackRow').append(newRow);
@@ -156,7 +155,21 @@ $("#search-button").on("click", function() {
             console.log(errorThrown);
             location.reload();
           }).done(function(response, textStatus, jqXHR){
-            console.log(response.tracks[0]);
+            console.log(response.tracks[0]);=======
+            $('.searchTable').removeAttr("style");
+            $('.searchTable').attr('style', "display:none");
+            var artistId = $(this).attr('id');
+            var queryURL = "https://api.spotify.com/v1/recommendations?limit=10&market=US&seed_artists=" + artistId;
+            $.ajax({
+              method: "GET",
+              beforeSend: function(request) {
+                request.setRequestHeader("Authorization", authorizationToken);
+                request.setRequestHeader("Accept", "application/json");
+              },
+              url: queryURL,
+          }).then(function(response){
+            $('#recommendations').empty();
+
             for (var i = 0; i < response.tracks.length; i++) {
               console.log(response.tracks[i]);    
               // Create Variables for Recommendation Row
@@ -165,6 +178,7 @@ $("#search-button").on("click", function() {
               var songArtist =  response.tracks[i].artists[0].name;
               var albumTitle =  response.tracks[i].album.name;
               var recRow = $('<tr>');
+              recRow.addClass("recRow")
 
               // Create Variable for Image <td>
               var recImage = $('<img>').attr('src', imageSource)
@@ -185,8 +199,17 @@ $("#search-button").on("click", function() {
               var recAlbum = $('<td>');
               recAlbum.addClass('recAlbum');
               recAlbum.text(albumTitle)
-
+              var recPlay = $('<td>');
+              var playUri = response.tracks[i].uri;
+              playUri = playUri.substring(playUri.lastIndexOf(":")+1);
+              var src = "https://open.spotify.com/embed/track/" + playUri
+              console.log(response);
+              console.log(playUri);
+              var player = $('<iframe width="300" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>')
+              player.attr("src", src)
+              recPlay.append(player);
               // Append to newRow
+              recRow.append(recPlay);
               recRow.append(recImage);
               recRow.append(recTitle);
               recRow.append(recArtist);
