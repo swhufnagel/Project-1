@@ -175,6 +175,8 @@ $("#search-button").on("click", function() {
               // Create Variables for Recommendation Row
               var imageSource = response.tracks[i].album.images[1].url;
               var songTitle =  response.tracks[i].name;
+              songTitle = songTitle.substring(0,25);
+              console.log(songTitle);
               var songArtist =  response.tracks[i].artists[0].name;
               var albumTitle =  response.tracks[i].album.name;
               var recRow = $('<tr>');
@@ -205,12 +207,12 @@ $("#search-button").on("click", function() {
               var src = "https://open.spotify.com/embed/track/" + playUri
               console.log(response);
               console.log(playUri);
-              var player = $('<iframe width="300" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>')
+              var player = $('<iframe width="80" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>')
               player.attr("src", src)
               recPlay.append(player);
               // Append to newRow
               recRow.append(recPlay);
-              recRow.append(recImage);
+              // recRow.append(recImage);
               recRow.append(recTitle);
               recRow.append(recArtist);
               recRow.append(recAlbum);
