@@ -24,21 +24,23 @@
     <div class="titlecont"><img class="title" src="assets/images/T.png"></div>
   </div>
     <div class="vertical center aligned masthead segment mainsection">
-        <div class="ui text container">
+        <div id="holder" class="ui text container">
           <h1 class="ui inverted header">
             </h1>
           <h2 class = "find">Find music you like now!</h2>
           <div class="ui form searchform">
             <div class="field">
-              <label class = "searchlabel">Artist/Song</label>
+              <label id="searchLabel" class = "searchlabel">Artist/Song</label>
               <input id='searchTerm' type="text">
             </div>
           </div>
           <div class="ui huge primary button " id='login-button'>Log In to Spotify!<i class=""></i></div>
           <div class="ui huge primary button hide" style="display:none" id='search-button'>Gimme Tunes!<i class=""></i></div>
+          <button id="clear">Clear</button><button id="more">More</button>
         </div>
         <!-- This table pulls results for exactly what you searched for -->
         <!-- Search Results -->
+        <div id="nothing"></div>
         <table id = "searchTab" class="ui celled selectable inverted table searchTable">
           <thead>
 
@@ -77,11 +79,8 @@
               <div class="three wide column">
                 <h4 class="ui inverted header">Tunedea ©</h4>
               </div>
-              <div class="three wide column">
-                <h4 class="ui inverted header">Contact</h4>
-              </div>
-              <div class="seven wide column">
-                <h4 class="ui inverted header">Created by:</h4>
+              <div class="ten wide column">
+                <h4 id="footText" class="ui inverted header">Created by: Sean Hufnagel, Jim Clark, Devin Powell, Josh Moganfield</h4>
               </div>
             </div>
           </div>
