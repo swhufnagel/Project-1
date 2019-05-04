@@ -87,6 +87,7 @@ table {
     color: black;
     border: 1px black solid;
     box-shadow: 3px 3px 3px 0px grey;
+    margin-bottom:5px;
 }
 #search-button:hover, #login-button:hover{
     background-color: black;
@@ -129,10 +130,35 @@ table {
     max-width: 900px;
     overflow:auto;
 }
+#nothing{
+    text-align:center;
+    margin-top: 10%;
+    font-size: 21px;
+    font-weight: 700;
+}
+#clear,#more{
+    display:none;
+    background: rgba(0, 0, 0, 0);
+    border-radius:.28571429rem;
+    border: 1px solid black;
+    margin-bottom: 5px;
+}
+#clear{
+    float:left;
+}
+#clear:hover,#more:hover{
+    background: black;
+    color: white;
+    box-shadow: 2px 2px 2px 0px black;
+}
 .foot{
     position:fixed!important;
     bottom:0px;
     width:100%;
+}
+#footText{
+    font-size:15px;
+    font-weight:500;
 }
 
 
