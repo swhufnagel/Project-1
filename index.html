@@ -4,12 +4,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="assets/css/style.css">
-    <link rel="stylesheet" href="assets/css/reset.css">
-
-    <link rel="stylesheet" href="assets/css/semantic.css">
-    <!-- <link rel="stylesheet" type="text/css" href="semantic/dist/semantic.min.css"> -->
-    <script
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.11/semantic.min.css"></link>
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/reset.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+  <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+  <script
       src="https://code.jquery.com/jquery-3.1.1.min.js"
       integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
       crossorigin="anonymous"></script>
@@ -17,58 +17,75 @@
   <title>Tunedea</title>
 </head>
 <body>
-  <body class = "pushable">
-    
-    <!-- Page Contents -->
-    <div class="pusher">
-      <div class="ui inverted vertical center aligned masthead segment mainsection">
-  
-    
-        <div class="ui text container">
+  <!-- <img src="assets/images/background.jpg"> -->
+  <body class = "">
+    <!-- Page Content -->
+    <div class="navbar">
+    <div class="titlecont"><img class="title" src="assets/images/T.png"></div>
+  </div>
+    <div class="vertical center aligned masthead segment mainsection">
+        <div id="holder" class="ui text container">
           <h1 class="ui inverted header">
-            Tunedea
-          </h1>
-          <h2>Find music you like now!</h2>
+            </h1>
+          <h2 class = "find">Find music you like now!</h2>
           <div class="ui form searchform">
             <div class="field">
-              <label class = "searchlabel">Artist/Song</label>
-              <input type="text">
+              <label id="searchLabel" class = "searchlabel">Artist/Song</label>
+              <input id='searchTerm' type="text">
             </div>
           </div>
-          <div class="ui huge primary button">Gimme Tunes!<i class=""></i></div>
-          <button onclick="window.location.href ='https://accounts.spotify.com/authorize?client_id=6ba0c775865d4f34a62198bacaebc943&response_type=token&redirect_uri=https://djpowell23.github.io/Project-1/';">Log in to Spotify</button>  
+          <div class="ui huge primary button " id='login-button'>Log In to Spotify!<i class=""></i></div>
+          <div class="ui huge primary button hide" style="display:none" id='search-button'>Gimme Tunes!<i class=""></i></div>
+          <button id="clear">Clear</button><button id="more">More</button>
         </div>
+        <!-- This table pulls results for exactly what you searched for -->
+        <!-- Search Results -->
+        <div id="nothing"></div>
+        <table id = "searchTab" class="ui celled selectable inverted table searchTable">
+          <thead>
+
+            <tr id="rowFixed">
+              <th id="imageCol" class='two wide column image'>Image</th>
+              <th id="artistCol" class='seven wide column artist'>Artist</th>
+              <th id="genreCol" class='seven wide column genre'>Genre</th>
+            </tr>
+
+          </thead>
+          <!-- Tracks Populate Here -->
+          <tbody id='newTrackRow'></tbody>
+        </table>
+
+        <!-- Recommended Tracks -->
+        <table id="recommended-artists" class='ui celled single line inverted table padding'>
+          <thead id="thead">
+
+            <tr id="rowFix">
+            <th id='favoriteHead' class='two wide column favorite'>Add to Library</th>
+            <th id='songHead'class='two wide column song'>Song</th>
+            <th id='recTitle' class='four wide column recTitle'>Title</th>
+            <th id='recArtist' class='four wide column recArtist'>Artist</th>
+            <th id='recAlbum' class='four wide recAlbum'>Album</th>
+          </tr>
+
+          </thead>
+          <!-- Recommended Tracks Populate Here -->
+          <tbody id='recommendations'></tbody>
+        </table>
       </div>
     
-      <div class="ui inverted vertical footer segment">
-        <div class="ui container">
-          <div class="ui stackable inverted divided equal height stackable grid">
-            <div class="three wide column">
-              <h4 class="ui inverted header">About</h4>
-              <div class="ui inverted link list">
-                <a href="#" class="item">Sitemap</a>
-                <a href="#" class="item">Contact Us</a>
-                <a href="#" class="item">Religious Ceremonies</a>
-                <a href="#" class="item">Gazebo Plans</a>
+      <div class="ui inverted vertical footer segment foot">
+          <div class="ui container">
+            <div class="ui inverted divided equal height grid">
+              <div class="three wide column">
+                <h4 class="ui inverted header">Tunedea ©</h4>
               </div>
-            </div>
-            <div class="three wide column">
-              <h4 class="ui inverted header">Services</h4>
-              <div class="ui inverted link list">
-                <a href="#" class="item">Banana Pre-Order</a>
-                <a href="#" class="item">DNA FAQ</a>
-                <a href="#" class="item">How To Access</a>
-                <a href="#" class="item">Favorite X-Men</a>
+              <div class="ten wide column">
+                <h4 id="footText" class="ui inverted header">Created by: Sean Hufnagel, Jim Clark, Devin Powell, Josh Moganfield</h4>
               </div>
-            </div>
-            <div class="seven wide column">
-              <h4 class="ui inverted header">Footer Header</h4>
-              <p>Extra space for a call to action inside the footer that could help re-engage users.</p>
             </div>
           </div>
         </div>
       </div>
-    </div>
     </body>
 
 

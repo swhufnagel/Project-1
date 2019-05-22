@@ -1,9 +1,198 @@
+
+body{
+    background: url("../images/background.jpg") 25% 0% no-repeat;
+    position: relative;
+    overflow: auto; 
+} 
+.title{
+    text-align: center;
+    color:white;
+    width:200px;
+    position:relative;
+    margin-left:auto;
+    margin-right:auto;
+}
+.navbar{
+    /* position:fixed; */
+    /* top:0px; */
+    width:100%;
+    background-color: black;
+    padding:0px;
+    text-align:center;
+    margin-bottom:25px;
+}
+tbody {
+    font-size: 18px;
+}
+
+table td
+{
+    text-align: left;
+    vertical-align: middle;
+    padding: 5px;
+    position: relative;
+}
+
+.ui.table thead tr:first-child > th {
+    background-color: black;
+    position: sticky ;
+    top: 0;
+    z-index: 2;
+}
+
+thead {
+    background-color: black;
+    font-size: 28px;
+    text-align: left;
+}
+
+#title, #artist, #album {
+    min-width: 22vw;
+}
+
+.artistImg, .recImg {
+    border: 1px solid black;
+    width: 200px;
+    height:175px;
+}
+
+table {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+#search-button .hide {
+    display: none;
+}
 .mainsection{
     min-height: 600px;
+}
+.find{
+    text-align:center;
+    display: none; 
+}
+#searchTerm{
+    box-shadow: 4px 4px 4px 0px grey;
+    background-color: rgba(255, 255, 255, 0.404);
+}
+#search-button .hide {
+    display: none;
+}
+#search-button, #login-button{
+    width: 200px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 8px;
+    background-color: rgba(255, 255, 255, 0);
+    color: black;
+    border: 1px black solid;
+    box-shadow: 3px 3px 3px 0px grey;
+    margin-bottom:5px;
+}
+#search-button:hover, #login-button:hover{
+    background-color: black;
+    color: white;
+    box-shadow: 5px 5px 5px 0px grey;
 }
 .searchform{
     padding:20px;
 }
 .searchlabel{
-    color:white!important;
+    color:black;
+}
+.padding{
+    display:none;
+}
+.searchTable{
+    display:none;
+}
+#searchTab{
+    width:85%;
+    margin: 10px;
+    margin-left:auto;
+    margin-right:auto;
+    margin-bottom:70px;
+    max-height: 400px;
+    max-width: 900px;
+    overflow:auto;
+}
+#favorite{
+    margin-left:40%;
+    color: rgba(139, 251, 255, 0.836);
+}
+#recommended-artists{
+    width:85%;
+    margin: 10px;
+    margin-left:auto;
+    margin-right:auto;
+    margin-bottom:70px;
+    max-height: 400px;
+    max-width: 900px;
+    overflow:auto;
+}
+#nothing{
+    text-align:center;
+    margin-top: 10%;
+    font-size: 21px;
+    font-weight: 700;
+}
+#clear,#more{
+    display:none;
+    background: rgba(0, 0, 0, 0);
+    border-radius:.28571429rem;
+    border: 1px solid black;
+    margin-bottom: 5px;
+}
+#clear{
+    float:left;
+}
+#clear:hover,#more:hover{
+    background: black;
+    color: white;
+    box-shadow: 2px 2px 2px 0px black;
+}
+.foot{
+    position:fixed!important;
+    bottom:0px;
+    width:100%;
+}
+#footText{
+    font-size:15px;
+    font-weight:500;
+}
+
+
+@media only screen and (max-width: 768px){
+
+#imageCol{max-width:33%;float:left;margin-right:5%;}
+#artistCol{max-width:33%;float:left;margin-right:10%;}
+#genreCol{max-width:33%;float:left;display:none!important;}
+#artistPic{height:60px;width:60px;float:left;margin-left:2%;}
+#artistText{max-width:33%;float:left;margin-left:4%;}
+#genreText{max-width:33%;display:none!important;}
+.searchResult{min-height:80px!important;}
+.ui.table:not(.unstackable)tr{min-height:50px;}
+#rowFixed{height:40px;}
+
+#playSong{width: 350px;}
+#songHead{max-width:50%;float:left;}
+#favoriteHead{min-width:23%;max-width:50%;float:left;}
+#favoriteCol{min-width:30%;max-width:50%;float:left;margin-top: 30px;}
+#playerCol{max-width:50%;}
+#favorite {margin-left: 20%;}
+#recTitle{display:none!important;}
+#recArtist{display:none!important;}
+#recAlbum{display:none!important;}
+#rowFix{height:40px;}
+}
+@media only screen and (max-width: 610px){
+#recommended-artists{
+    margin-bottom:90px;
+}
+#playSong {
+    width: 230px;
+}
+#favoriteCol{min-width:25%;}
+#favoriteHead{font-size:12px;}
+#songHead{font-size:14px;}
 }
