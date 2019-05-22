@@ -47,7 +47,7 @@ if (redirectUri !== "https://djpowell23.github.io/Project-1/") {
 }
 $('#login-button').on('click', function () {
   var scope = "user-library-modify";
-  window.location.href = 'https://accounts.spotify.com/authorize?client_id=6ba0c775865d4f34a62198bacaebc943&response_type=token&scope=' + encodeURIComponent(scope) + '&redirect_uri=' + redirectUri;
+  window.location.href = 'https://accounts.spotify.com/authorize?client_id=b9116b3684384be68c99d7f200ee0ff6&response_type=token&scope=' + encodeURIComponent(scope) + '&redirect_uri=' + redirectUri;
 })
 function search(){
   buildQueryURL()
